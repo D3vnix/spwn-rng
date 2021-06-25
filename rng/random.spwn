@@ -1,0 +1,52 @@
+// This RNG uses a Linear Congruential Generating method
+// Where Xn = (Xn-1 * a + c) % m
+// It is a simple method but it is efficient and fast
+
+// These are preset values
+// You can change them if you want
+// But i dont recommend it
+m = 2 ^ 32 // Modulus
+a = 1664525 // Multiplier
+c = 1013904223 // Increment
+
+// This is the starting seed of each iteration
+// you can change this value at any time using setSeed()
+// Currently, the seed has to be set manually until i find a
+// way to randomly set a starting seed 
+// everytime the code is compiled
+old_seed = 12345
+
+setSeed = (s) {
+	old_seed = s
+}
+
+// Implementation of LCG
+// Generates an integer between 0 and 2^32 - 1
+lcgNextInt = () {
+	new_seed = (old_seed * a + c) % m
+	old_seed = new_seed
+	return new_seed
+}
+
+// Generates a decimal between 0 and 1
+lcgNextFloat01 = () {
+	return (lcgNextInt() / m)
+}
+
+// Generates a decimal within the given range
+lcgNextFloatInRange = (min, max) {
+	value = lcgNextFloat01()
+	scale = max - min
+	result = min + value * scale
+	return result
+}
+
+// Generates an integer within the given range
+lcgNextIntInRange = (min, max) {	
+	value = lcgNextInt()
+	scale = (max - min) / (m - 1)
+	result = (value * scale) + min
+	return result
+}
+
+return { seed: setSeed, randomInt: lcgNextInt, randomFloat: lcgNextFloat01, randomFloatInRange: lcgNextFloatInRange, randomIntInRange: lcgNextIntInRange }	
