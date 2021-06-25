@@ -1,0 +1,22 @@
+rng = import "random.spwn"
+
+// You need to put a new seed that you think of
+// Everytime you compile/build your code
+// In order to generate a new sequence of random numbers
+// This is due to the limitations of spwn not allowing me
+// To access any data on the computer such as date, time etc.
+// To generate a random seed on build/compile
+// If you have a solution to this please dm me Nix#6653
+rng.seed(1471)
+
+// Generates a random integer between 0 and 2^32 - 1
+random_int = rng.randomInt()
+
+// Generates a random integer within a specified range
+random_int_in_range = rng.randomIntInRange(10, 100)
+
+// Generates a random float between 0 and 1
+random_decimal = rng.randomFloat()
+
+// Generates a random float within a specified range
+random_decimal_in_range = rng.randomFloatInRange(10, 100)
