@@ -16,7 +16,6 @@ c = 1013904223 // Increment
 // everytime the code is compiled
 old_seed = 12345
 
-
 setSeed = (s) {
 	old_seed = s
 }
@@ -44,7 +43,7 @@ lcgNextFloatInRange = (min, max) {
 
 // Generates an integer within the given range
 lcgNextIntInRange = (min, max) {	
-	value = $.floor(lcgNextFloat01())
+	value = lcgNextInt()
 	scale = (max - min) / (m - 1)
 	result = (value * scale) + min
 	return result
